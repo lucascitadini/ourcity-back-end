@@ -1,13 +1,5 @@
 package com.citadini.ourcity.service;
 
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.citadini.ourcity.domain.Categoria;
 import com.citadini.ourcity.domain.Ocorrencia;
 import com.citadini.ourcity.domain.Status;
@@ -16,6 +8,13 @@ import com.citadini.ourcity.repositories.CategoriaRepository;
 import com.citadini.ourcity.repositories.OcorrenciaRepository;
 import com.citadini.ourcity.repositories.StatusRepository;
 import com.citadini.ourcity.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Date;
 
 @Service
 public class DBService {

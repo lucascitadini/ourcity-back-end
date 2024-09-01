@@ -1,17 +1,15 @@
 package com.citadini.ourcity.service.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.citadini.ourcity.dto.OcorrenciaNewDTO;
 import com.citadini.ourcity.resources.exceptions.FieldMessage;
 import com.citadini.ourcity.service.CategoriaService;
 import com.citadini.ourcity.service.StatusService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OcorrenciaInsertValidator implements ConstraintValidator<OcorrenciaInsert, OcorrenciaNewDTO> {
 	

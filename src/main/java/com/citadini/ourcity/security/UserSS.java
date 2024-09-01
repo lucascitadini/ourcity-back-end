@@ -1,18 +1,20 @@
 package com.citadini.ourcity.security;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
+import java.util.Collection;
+import java.util.List;
+
 public class UserSS implements UserDetails {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	private String email;
-	private String senha;
+	private String password;
 	
 	public UserSS() {
 		
@@ -22,20 +24,20 @@ public class UserSS implements UserDetails {
 		super();
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
-		this.authorites = Arrays.asList(new SimpleGrantedAuthority("HOLE_CLIENTE"));
+		this.password = senha;
+		this.authorizes = List.of(new SimpleGrantedAuthority("HOLE_CLIENTE"));
 	}
 
-	private Collection<? extends GrantedAuthority> authorites;
+	private Collection<? extends GrantedAuthority> authorizes;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorites;
+		return authorizes;
 	}
 
 	@Override
 	public String getPassword() {
-		return senha;
+		return password;
 	}
 	
 	@Override

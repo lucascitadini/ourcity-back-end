@@ -1,13 +1,11 @@
 package com.citadini.ourcity.dto;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
+import com.citadini.ourcity.service.validation.UsuarioInsert;
 import org.hibernate.validator.constraints.Length;
 
-import com.citadini.ourcity.service.validation.UsuarioInsert;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @UsuarioInsert
 public class UsuarioNewDTO implements Serializable {

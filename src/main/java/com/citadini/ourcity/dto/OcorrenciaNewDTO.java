@@ -1,12 +1,10 @@
 package com.citadini.ourcity.dto;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.NotEmpty;
-
+import com.citadini.ourcity.service.validation.OcorrenciaInsert;
 import org.hibernate.validator.constraints.Length;
 
-import com.citadini.ourcity.service.validation.OcorrenciaInsert;
+import jakarta.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @OcorrenciaInsert
 public class OcorrenciaNewDTO implements Serializable {

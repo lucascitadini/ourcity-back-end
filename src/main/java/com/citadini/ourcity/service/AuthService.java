@@ -1,14 +1,13 @@
 package com.citadini.ourcity.service;
 
-import java.util.Random;
-
+import com.citadini.ourcity.domain.Usuario;
+import com.citadini.ourcity.repositories.UsuarioRepository;
+import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.citadini.ourcity.domain.Usuario;
-import com.citadini.ourcity.repositories.UsuarioRepository;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
+import java.util.Random;
 
 @Service
 public class AuthService {

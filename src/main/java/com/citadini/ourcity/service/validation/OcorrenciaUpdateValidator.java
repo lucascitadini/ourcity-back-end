@@ -1,13 +1,5 @@
 package com.citadini.ourcity.service.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.citadini.ourcity.domain.Ocorrencia;
 import com.citadini.ourcity.domain.enums.StatusEnum;
 import com.citadini.ourcity.dto.OcorrenciaDTO;
@@ -15,6 +7,12 @@ import com.citadini.ourcity.resources.exceptions.FieldMessage;
 import com.citadini.ourcity.service.CategoriaService;
 import com.citadini.ourcity.service.OcorrenciaService;
 import com.citadini.ourcity.service.StatusService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OcorrenciaUpdateValidator implements ConstraintValidator<OcorrenciaUpdate, OcorrenciaDTO> {
 	

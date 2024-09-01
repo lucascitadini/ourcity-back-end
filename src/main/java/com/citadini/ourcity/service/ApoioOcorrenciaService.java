@@ -1,12 +1,5 @@
 package com.citadini.ourcity.service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.citadini.ourcity.domain.ApoioOcorrencia;
 import com.citadini.ourcity.domain.ApoioOcorrenciaPK;
 import com.citadini.ourcity.domain.Ocorrencia;
@@ -14,6 +7,12 @@ import com.citadini.ourcity.domain.Usuario;
 import com.citadini.ourcity.repositories.ApoioOcorrenciaRepository;
 import com.citadini.ourcity.security.UserSS;
 import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApoioOcorrenciaService {

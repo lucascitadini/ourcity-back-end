@@ -1,8 +1,7 @@
 package com.citadini.ourcity.service;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.citadini.ourcity.security.UserSS;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class UserService {
 

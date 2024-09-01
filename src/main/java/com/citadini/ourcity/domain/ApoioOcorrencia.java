@@ -1,16 +1,17 @@
 package com.citadini.ourcity.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class ApoioOcorrencia implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore

@@ -1,17 +1,5 @@
 package com.citadini.ourcity.service;
 
-import java.awt.image.BufferedImage;
-import java.net.URI;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.citadini.ourcity.domain.Usuario;
 import com.citadini.ourcity.dto.UsuarioDTO;
 import com.citadini.ourcity.dto.UsuarioNewDTO;
@@ -19,6 +7,16 @@ import com.citadini.ourcity.repositories.UsuarioRepository;
 import com.citadini.ourcity.security.UserSS;
 import com.citadini.ourcity.service.exceptions.AuthorizationException;
 import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
+import java.awt.image.BufferedImage;
+import java.net.URI;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {

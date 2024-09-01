@@ -1,10 +1,10 @@
 package com.citadini.ourcity.domain;
 
-import java.io.Serializable;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Embeddable
 public class ApoioOcorrenciaPK implements Serializable {

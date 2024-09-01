@@ -1,20 +1,18 @@
 package com.citadini.ourcity.resources;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import com.citadini.ourcity.dto.EmailDTO;
+import com.citadini.ourcity.security.JWTUtil;
+import com.citadini.ourcity.security.UserSS;
+import com.citadini.ourcity.service.AuthService;
+import com.citadini.ourcity.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.citadini.ourcity.dto.EmailDTO;
-import com.citadini.ourcity.security.JWTUtil;
-import com.citadini.ourcity.security.UserSS;
-import com.citadini.ourcity.service.AuthService;
-import com.citadini.ourcity.service.UserService;
 
 @RestController
 @RequestMapping(value = "/auth")
