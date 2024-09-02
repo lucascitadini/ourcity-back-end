@@ -4,10 +4,10 @@ import com.citadini.ourcity.domain.OccurrenceCommentEntity;
 import com.citadini.ourcity.domain.OccurrenceEntity;
 import com.citadini.ourcity.domain.UserEntity;
 import com.citadini.ourcity.controllers.dto.OccurrenceCommentRequest;
+import com.citadini.ourcity.exceptions.AccessDeniedException;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.OccurrenceCommentRepository;
 import com.citadini.ourcity.security.UserSS;
-import com.citadini.ourcity.service.exceptions.AuthorizationException;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import jakarta.validation.Valid;
+
 import java.util.Date;
 import java.util.Optional;
 
@@ -54,7 +55,7 @@ public class OccurrenceCommentService {
 
 	public OccurrenceCommentEntity find(Long id) {
 		Optional<OccurrenceCommentEntity> occurrenceComment = occurrenceCommentRepository.findById(id);
-		return occurrenceComment.orElseThrow( () -> new ObjectNotFoundException(
+		return occurrenceComment.orElseThrow( () -> new NotFoundException(
 				String.format("Object not found: Id: %d, Type: %s", id, OccurrenceCommentEntity.class.getName())));
 	}
 	
@@ -62,7 +63,7 @@ public class OccurrenceCommentService {
 		UserSS user = UserAuthenticateService.authenticated();
 		OccurrenceCommentEntity occurrenceComment = find(id);
 		if (user == null || !occurrenceComment.getUser().getId().equals(user.getId())) {
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 		}
 		occurrenceCommentRepository.deleteById(id);
 	}

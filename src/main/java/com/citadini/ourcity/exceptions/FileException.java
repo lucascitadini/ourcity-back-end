@@ -1,4 +1,4 @@
-package com.citadini.ourcity.service.exceptions;
+package com.citadini.ourcity.exceptions;
 
 public class FileException extends RuntimeException {
 

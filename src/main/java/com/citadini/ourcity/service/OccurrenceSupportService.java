@@ -4,9 +4,9 @@ import com.citadini.ourcity.domain.OccurrenceSupportEntity;
 import com.citadini.ourcity.domain.OccurrenceSupportPK;
 import com.citadini.ourcity.domain.OccurrenceEntity;
 import com.citadini.ourcity.domain.UserEntity;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.OccurrenceSupportRepository;
 import com.citadini.ourcity.security.UserSS;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +42,7 @@ public class OccurrenceSupportService {
 	
 	public OccurrenceSupportEntity find(OccurrenceSupportPK id) {
 		Optional<OccurrenceSupportEntity> occurrenceSupport = occurrenceSupportRepository.findById(id);
-		return occurrenceSupport.orElseThrow( () -> new ObjectNotFoundException(
+		return occurrenceSupport.orElseThrow( () -> new NotFoundException(
 				String.format("Object not found: OccurrenceId: %d, UserId: %d, Type: %s",
 						id.getOccurrence().getId(), id.getUser().getId(), OccurrenceSupportEntity.class.getName())));
 	}
@@ -50,7 +50,7 @@ public class OccurrenceSupportService {
 	public void delete(Long occurrenceId) {
 		UserSS userSS = UserAuthenticateService.authenticated();
 		if (occurrenceId == null) {
-			throw new ObjectNotFoundException("Occurrence Id cannot be blank");
+			throw new NotFoundException("Occurrence Id cannot be blank");
 		}
 		OccurrenceSupportPK pk = new OccurrenceSupportPK();
 		pk.setOccurrence(occurrenceService.find(occurrenceId));

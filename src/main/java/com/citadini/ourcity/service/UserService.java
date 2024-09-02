@@ -3,10 +3,10 @@ package com.citadini.ourcity.service;
 import com.citadini.ourcity.domain.UserEntity;
 import com.citadini.ourcity.controllers.dto.UserRequest;
 import com.citadini.ourcity.controllers.dto.NewUserRequest;
+import com.citadini.ourcity.exceptions.AccessDeniedException;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.UserRepository;
 import com.citadini.ourcity.security.UserSS;
-import com.citadini.ourcity.service.exceptions.AuthorizationException;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,23 +37,23 @@ public class UserService {
 	public UserEntity find(Long id) {
 		UserSS user = UserAuthenticateService.authenticated();
 		if (user == null || !id.equals(user.getId())) {
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 		}
 		
 		Optional<UserEntity> obj = repo.findById(id);
-		return obj.orElseThrow( () -> new ObjectNotFoundException(
+		return obj.orElseThrow( () -> new NotFoundException(
 				String.format("Object not found: Id: %d, Type: %s", id, UserEntity.class.getName())));
 	}
 
 	public UserEntity findByEmail(String email) {
 		UserSS user = UserAuthenticateService.authenticated();
 		if (user == null || !email.equals(user.getUsername())) {
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 		}
 		
 		UserEntity obj = repo.findByEmail(email);
 		if (obj == null)
-			throw new ObjectNotFoundException(
+			throw new NotFoundException(
 					String.format("Object not found: Email: %s, Type: %s", email, UserEntity.class.getName()));
 		return obj;
 	}
@@ -89,7 +89,7 @@ public class UserService {
 	private static UserSS getUserSS() {
 		UserSS user = UserAuthenticateService.authenticated();
 		if (user == null) {
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 		}
 		return user;
 	}

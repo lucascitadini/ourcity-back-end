@@ -3,7 +3,6 @@ package com.citadini.ourcity.service.validation;
 import com.citadini.ourcity.domain.UserEntity;
 import com.citadini.ourcity.controllers.dto.UserRequest;
 import com.citadini.ourcity.repositories.UserRepository;
-import com.citadini.ourcity.controllers.exceptions.FieldMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -36,7 +35,7 @@ public class UpdateUserValidator implements ConstraintValidator<UpdateUser, User
 			list.add(new FieldMessage("email", "Email already exists"));
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
+			context.buildConstraintViolationWithTemplate(e.message()).addPropertyNode(e.fieldName())
 					.addConstraintViolation();
 		}
 		return list.isEmpty();

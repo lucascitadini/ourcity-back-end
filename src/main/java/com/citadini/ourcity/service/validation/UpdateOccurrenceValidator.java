@@ -3,7 +3,6 @@ package com.citadini.ourcity.service.validation;
 import com.citadini.ourcity.controllers.dto.OccurrenceRequest;
 import com.citadini.ourcity.domain.OccurrenceEntity;
 import com.citadini.ourcity.domain.enums.StatusEnum;
-import com.citadini.ourcity.controllers.exceptions.FieldMessage;
 import com.citadini.ourcity.service.CategoryService;
 import com.citadini.ourcity.service.OccurrenceService;
 import com.citadini.ourcity.service.StatusService;

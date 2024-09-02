@@ -1,6 +1,6 @@
 package com.citadini.ourcity.service;
 
-import com.citadini.ourcity.service.exceptions.FileException;
+import com.citadini.ourcity.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;

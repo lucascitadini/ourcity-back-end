@@ -1,8 +1,8 @@
 package com.citadini.ourcity.service;
 
 import com.citadini.ourcity.domain.UserEntity;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.UserRepository;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class AuthService {
 	public void sendNewPassword(String email) {
 		UserEntity user = userRepository.findByEmail(email);
 		if (user == null)
-			throw new ObjectNotFoundException("Email not found");
+			throw new NotFoundException("Email not found");
 		String newPass = newPassword();
 		user.setPassword(pe.encode(newPass));
 		

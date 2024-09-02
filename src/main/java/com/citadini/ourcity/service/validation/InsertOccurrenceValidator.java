@@ -1,7 +1,6 @@
 package com.citadini.ourcity.service.validation;
 
 import com.citadini.ourcity.controllers.dto.NewOccurrenceRequest;
-import com.citadini.ourcity.controllers.exceptions.FieldMessage;
 import com.citadini.ourcity.service.CategoryService;
 import com.citadini.ourcity.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;

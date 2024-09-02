@@ -5,13 +5,13 @@ import com.citadini.ourcity.domain.OccurrenceEntity;
 import com.citadini.ourcity.domain.StatusEntity;
 import com.citadini.ourcity.domain.UserEntity;
 import com.citadini.ourcity.controllers.dto.NewOccurrenceRequest;
+import com.citadini.ourcity.exceptions.AccessDeniedException;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.CategoryRepository;
 import com.citadini.ourcity.repositories.OccurrenceRepository;
 import com.citadini.ourcity.repositories.StatusRepository;
 import com.citadini.ourcity.repositories.UserRepository;
 import com.citadini.ourcity.security.UserSS;
-import com.citadini.ourcity.service.exceptions.AuthorizationException;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -55,7 +55,7 @@ public class OccurrenceService {
 	
 	public OccurrenceEntity find(Long id) {
 		Optional<OccurrenceEntity> obj = occurrenceRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		return obj.orElseThrow(() -> new NotFoundException(
 				String.format("Object not found: Id: %d, Type: %s", id, OccurrenceEntity.class.getName())));
 	}
 
@@ -77,11 +77,11 @@ public class OccurrenceService {
 				objDto.longitude(),
 				objDto.fullAddress(),
 				objDto.description(),
-				user.orElseThrow( () -> new ObjectNotFoundException(
+				user.orElseThrow( () -> new NotFoundException(
 						String.format("Object not found: Id: %d, Type: %s", userSS.getId(), UserEntity.class.getName()))),
-				cat.orElseThrow( () -> new ObjectNotFoundException(
+				cat.orElseThrow( () -> new NotFoundException(
 						String.format("Object not found: Id: %d, Type: %s", objDto.categoryId(), CategoryEntity.class.getName()))),
-				status.orElseThrow( () -> new ObjectNotFoundException(
+				status.orElseThrow( () -> new NotFoundException(
 						String.format("Object not found: Id: %d, Type: %s", objDto.statusId(), StatusEntity.class.getName())))
 				);
 	}
@@ -96,7 +96,7 @@ public class OccurrenceService {
 		UserSS user = UserAuthenticateService.authenticated();
 		OccurrenceEntity occurrence = find(id);
 		if (user == null || !occurrence.getUser().getId().equals(user.getId()))
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 		occurrenceRepository.deleteById(id);
 	}
 
@@ -104,7 +104,7 @@ public class OccurrenceService {
 		OccurrenceEntity occurrence = find(id);
 		UserSS user = UserAuthenticateService.authenticated();
 		if (occurrence.getUser().getId() != user.getId())
-			throw new AuthorizationException("Access denied");
+			throw new AccessDeniedException("Access denied");
 
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(file);
 		jpgImage = imageService.cropSquare(jpgImage);

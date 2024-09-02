@@ -1,8 +1,8 @@
 package com.citadini.ourcity.service;
 
 import com.citadini.ourcity.domain.CategoryEntity;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.CategoryRepository;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ public class CategoryService {
 
 	public CategoryEntity find(Integer id) {
 		Optional<CategoryEntity> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		return obj.orElseThrow(() -> new NotFoundException(
 				String.format("Object Not Found: Id: %d, Type: %s", id, CategoryEntity.class.getName())));
 	}
 

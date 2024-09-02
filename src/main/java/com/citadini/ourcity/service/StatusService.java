@@ -1,8 +1,8 @@
 package com.citadini.ourcity.service;
 
 import com.citadini.ourcity.domain.StatusEntity;
+import com.citadini.ourcity.exceptions.NotFoundException;
 import com.citadini.ourcity.repositories.StatusRepository;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ public class StatusService {
 
 	public StatusEntity find(Integer id) {
 		Optional<StatusEntity> obj = statusRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		return obj.orElseThrow(() -> new NotFoundException(
 				String.format("Object not found: Id: %d, Type: %s", id, StatusEntity.class.getName())));
 	}
 
