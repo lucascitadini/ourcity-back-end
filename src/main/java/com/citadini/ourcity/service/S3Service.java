@@ -30,7 +30,7 @@ public class S3Service {
 			String contentType = multipartFile.getContentType();
 			return uploadFile(is, fileName, contentType);
 		} catch (IOException e) {
-			throw new FileException("Erro de IO: " + e.getMessage());
+			throw new FileException("IO Error: " + e.getMessage());
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class S3Service {
 			s3client.putObject(bucketName, fileName, is, meta);
 			return s3client.getUrl(bucketName, fileName).toURI();
 		} catch (URISyntaxException e) {
-			throw new FileException("Erro ao converter URL para URI");
+			throw new FileException("Error converting URL to URI");
 		}
 	}
 

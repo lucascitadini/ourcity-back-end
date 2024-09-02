@@ -1,7 +1,7 @@
 package com.citadini.ourcity.service;
 
-import com.citadini.ourcity.domain.StatusEntity;
-import com.citadini.ourcity.repositories.StatusRepository;
+import com.citadini.ourcity.domain.CategoryEntity;
+import com.citadini.ourcity.repositories.CategoryRepository;
 import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,24 +13,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StatusService {
+public class CategoryService {
 	
 	@Autowired
-	private StatusRepository statusRepository;
+	private CategoryRepository repo;
 
-	public StatusEntity find(Integer id) {
-		Optional<StatusEntity> obj = statusRepository.findById(id);
+	public CategoryEntity find(Integer id) {
+		Optional<CategoryEntity> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				String.format("Object not found: Id: %d, Type: %s", id, StatusEntity.class.getName())));
+				String.format("Object Not Found: Id: %d, Type: %s", id, CategoryEntity.class.getName())));
 	}
 
-	public List<StatusEntity> findAll() {
-		return statusRepository.findAll();
+	public List<CategoryEntity> findAll() {
+		return repo.findAll();
 	}
 
-	public Page<StatusEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<CategoryEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return statusRepository.findAll(pageRequest);
+		return repo.findAll(pageRequest);
 	}
 
 }

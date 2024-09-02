@@ -20,7 +20,7 @@ public class ImageService {
 	public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile) {
 		String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
 		if (!"png".equalsIgnoreCase(ext) && !"jpg".equalsIgnoreCase(ext)) 
-			throw new FileException("Somente Imagens PNG e JPG são permitidas");
+			throw new FileException("Only Images PNG e JPG are allow");
 		
 		try {
 			BufferedImage img = ImageIO.read(uploadedFile.getInputStream());
@@ -29,7 +29,7 @@ public class ImageService {
 			}
 			return img;
 		} catch (IOException e) {
-			throw new FileException("Erro ao ler arquivo");
+			throw new FileException("Error on read archive");
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ImageService {
 			ImageIO.write(img, extension, os);
 			return new ByteArrayInputStream(os.toByteArray());
 		} catch (IOException e) {
-			throw new FileException("Erro ao ler arquivo");
+			throw new FileException("Error on read archive");
 		}
 	}
 	
