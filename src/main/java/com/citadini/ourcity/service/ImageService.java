@@ -1,20 +1,18 @@
 package com.citadini.ourcity.service;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
+import com.citadini.ourcity.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.citadini.ourcity.service.exceptions.FileException;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class ImageService {
@@ -22,7 +20,7 @@ public class ImageService {
 	public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile) {
 		String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
 		if (!"png".equalsIgnoreCase(ext) && !"jpg".equalsIgnoreCase(ext)) 
-			throw new FileException("Somente Imagens PNG e JPG são permitidas");
+			throw new FileException("Only Images PNG e JPG are allow");
 		
 		try {
 			BufferedImage img = ImageIO.read(uploadedFile.getInputStream());
@@ -31,7 +29,7 @@ public class ImageService {
 			}
 			return img;
 		} catch (IOException e) {
-			throw new FileException("Erro ao ler arquivo");
+			throw new FileException("Error on read archive");
 		}
 	}
 
@@ -48,7 +46,7 @@ public class ImageService {
 			ImageIO.write(img, extension, os);
 			return new ByteArrayInputStream(os.toByteArray());
 		} catch (IOException e) {
-			throw new FileException("Erro ao ler arquivo");
+			throw new FileException("Error on read archive");
 		}
 	}
 	

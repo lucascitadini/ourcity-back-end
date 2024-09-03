@@ -1,18 +1,17 @@
 package com.citadini.ourcity.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.citadini.ourcity.exceptions.FileException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.citadini.ourcity.service.exceptions.FileException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Service
 public class S3Service {
@@ -31,7 +30,7 @@ public class S3Service {
 			String contentType = multipartFile.getContentType();
 			return uploadFile(is, fileName, contentType);
 		} catch (IOException e) {
-			throw new FileException("Erro de IO: " + e.getMessage());
+			throw new FileException("IO Error: " + e.getMessage());
 		}
 	}
 	
@@ -42,7 +41,7 @@ public class S3Service {
 			s3client.putObject(bucketName, fileName, is, meta);
 			return s3client.getUrl(bucketName, fileName).toURI();
 		} catch (URISyntaxException e) {
-			throw new FileException("Erro ao converter URL para URI");
+			throw new FileException("Error converting URL to URI");
 		}
 	}
 

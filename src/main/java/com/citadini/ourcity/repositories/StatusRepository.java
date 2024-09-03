@@ -1,11 +1,10 @@
 package com.citadini.ourcity.repositories;
 
+import com.citadini.ourcity.domain.StatusEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.citadini.ourcity.domain.Status;
-
 @Repository
-public interface StatusRepository extends JpaRepository<Status, Integer> {
+public interface StatusRepository extends JpaRepository<StatusEntity, Integer> {
 
 }

@@ -1,23 +1,23 @@
 package com.citadini.ourcity.domain.enums;
 
 public enum StatusEnum {
-	CRIADOR(1, "Pendente"),
-	FINALIZADO(2, "Finalizado");
+	PENDING(1, "Pending"),
+	FINISHED(2, "Finished");
 	
-	private int cod;
-	private String descricao;
+	private final int cod;
+	private final String description;
 	
-	private StatusEnum(int cod, String descricao) {
+	private StatusEnum(int cod, String description) {
 		this.cod = cod;
-		this.descricao = descricao;
+		this.description = description;
 	}
 	
 	public int getCod() {
 		return cod;
 	}
 	
-	public String getDescricao () {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
 	
 	public static StatusEnum toEnum(Integer cod) {
@@ -32,6 +32,6 @@ public enum StatusEnum {
 			}
 		}
 		
-		throw new IllegalArgumentException("Id inválido: " + cod);
+		throw new IllegalArgumentException("Invalid Code: " + cod);
 	}
 }

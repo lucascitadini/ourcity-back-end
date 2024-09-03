@@ -1,35 +1,33 @@
 package com.citadini.ourcity.service;
 
-import java.util.Random;
-
+import com.citadini.ourcity.domain.UserEntity;
+import com.citadini.ourcity.exceptions.NotFoundException;
+import com.citadini.ourcity.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.citadini.ourcity.domain.Usuario;
-import com.citadini.ourcity.repositories.UsuarioRepository;
-import com.citadini.ourcity.service.exceptions.ObjectNotFoundException;
+import java.util.Random;
 
 @Service
 public class AuthService {
 
 	@Autowired
-	private UsuarioRepository usuarioRepo;
+	private UserRepository userRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
 	
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	
 	public void sendNewPassword(String email) {
-		Usuario cliente = usuarioRepo.findByEmail(email);
-		if (cliente == null) 
-			throw new ObjectNotFoundException("Email não encontrado");
+		UserEntity user = userRepository.findByEmail(email);
+		if (user == null)
+			throw new NotFoundException("Email not found");
 		String newPass = newPassword();
-		cliente.setSenha(pe.encode(newPass));
+		user.setPassword(pe.encode(newPass));
 		
-		usuarioRepo.save(cliente);
-//		emailService.sendNewPasswordEmail(cliente, newPass);
+		userRepository.save(user);
 	}
 
 	private String newPassword() {
@@ -42,11 +40,11 @@ public class AuthService {
 
 	private char randomChar() {
 		int opt = rand.nextInt(3);
-		if (opt == 0) {// gera um dígito
+		if (opt == 0) {
 			return (char) (rand.nextInt(10) + 48);
-		} else if (opt == 1) {// gera letra maiuscula
+		} else if (opt == 1) {
 			return (char) (rand.nextInt(26) + 65);
-		} else {// gera letra minuscula
+		} else {
 			return (char) (rand.nextInt(26) + 97);
 		}
 	}
